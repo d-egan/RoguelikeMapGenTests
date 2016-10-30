@@ -4,19 +4,23 @@
 
 #include <stdlib.h>
 #include <iostream>
-#include "BSPGenerator.h"
-#include "Part.h"
+#include "../include/BSPGenerator.h"
+#include "../include/Part.h"
 
 BSPGenerator::BSPGenerator(int minRoom, int maxRoom) : minRoomSize(minRoom), maxRoomSize(maxRoom) {
 
 }
 
 void BSPGenerator::generate(Map &map) {
+
+    //TODO Replace with actual tree data structure
     std::vector <Part> parts;
     parts.push_back(Part(0, 0, map.getWidth(), map.getHeight()));
 
     std::cout << "Maps address in generator: " << &map << std::endl;
 
+
+    //TODO Use recursive function
     for (int i = 0; i < 4; i++) {
         for (int z = parts.size() - 1; z >= 0; z--) {
             binaryPart(parts, z);
@@ -29,7 +33,8 @@ void BSPGenerator::generate(Map &map) {
 }
 
 void BSPGenerator::binaryPart(std::vector <Part> &pVec, int i) {
-    // Use better random number generator
+
+    //TODO Replace rand()
 
     int randomInt = rand();
 
@@ -54,6 +59,10 @@ void BSPGenerator::binaryPart(std::vector <Part> &pVec, int i) {
         // What if uneven
         Part a(pVec.at(i).getTopLeftX(), pVec.at(i).getTopLeftY(), splitPos - pVec.at(i).getTopLeftX(), pVec.at(i).getHeight());
         Part b(splitPos, pVec.at(i).getTopLeftY(), pVec.at(i).getWidth() - (splitPos - pVec.at(i).getTopLeftX()), pVec.at(i).getHeight());
+
+        //Part a(pVec.at(i).getX1(), pVec.at(i).getY1,
+        //
+
 
         // Fix ordering
         pVec.erase(pVec.begin() + i);
@@ -93,7 +102,7 @@ void BSPGenerator::digRooms(Map &map, std::vector<Part> &vPec) {
     // Is there a more efficient way to make these calls
     for(int i = 0; i < vPec.size(); i++) {
 
-        //map.markPart(vPec.at(i).getTopLeftX(), vPec.at(i).getTopLeftY(), vPec.at(i).getWidth(), vPec.at(i).getHeight());
+        map.markPart(vPec.at(i).getTopLeftX(), vPec.at(i).getTopLeftY(), vPec.at(i).getWidth(), vPec.at(i).getHeight());
 
         int x1 , x2, y1, y2 = 1;
         int xDif, yDif;
@@ -115,6 +124,15 @@ void BSPGenerator::digRooms(Map &map, std::vector<Part> &vPec) {
             y2 = rand() % yDif;
         }
 
-        map.dig(vPec.at(i).getTopLeftX() + x1, vPec.at(i).getTopLeftY() + y1, vPec.at(i).getWidth() - (x1 +x2), vPec.at(i).getHeight() - (y1 + y2));
+        //TODO Fix random adding and subtracting
+        map.dig(vPec.at(i).getTopLeftX() + x1+1, vPec.at(i).getTopLeftY() + y1+1, vPec.at(i).getWidth() - (x1 +x2)-2, vPec.at(i).getHeight() - (y1 + y2)-2);
+
+        if (i != 0) {
+            map.digCorridor(lastRoomX, lastRoomY, vPec.at(i).getTopLeftX() + vPec.at(i).getWidth() * .5, vPec.at(i).getTopLeftY() + vPec.at(i).getHeight() * .5 );
+        }
+
+        lastRoomX = int(vPec.at(i).getTopLeftX() + vPec.at(i).getWidth() * .5);
+        lastRoomY = int(vPec.at(i).getTopLeftY() + vPec.at(i).getHeight() * .5);
+
     }
 }

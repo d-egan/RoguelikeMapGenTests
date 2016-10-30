@@ -26,6 +26,7 @@ public:
 
     void dig(int x1, int y1, int w, int h);
     void markPart(int x1, int y1, int w, int h);
+    void digCorridor(int x1, int y1, int x2, int y2);
 };
 
 

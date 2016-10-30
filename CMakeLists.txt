@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.6)
 project(mapGen)
 
 
-set(SOURCE_FILES src/main.cpp Map.cpp include/Map.h src/Tile.cpp include/Tile.h src/Part.cpp src/Part.h src/BSPGenerator.cpp src/BSPGenerator.h)
+set(SOURCE_FILES src/main.cpp src/Map.cpp include/Map.h src/Tile.cpp include/Tile.h src/Part.cpp include/Part.h src/BSPGenerator.cpp include/BSPGenerator.h src/RWGenerator.cpp include/RWGenerator.h)
 set(EXECUTABLE_NAME "mapGen")
 add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES})
 

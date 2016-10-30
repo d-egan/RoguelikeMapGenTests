@@ -6,7 +6,7 @@
 #define MAPGEN_BSPGENERATOR_H
 
 
-#include "../include/Map.h"
+#include "Map.h"
 #include "Part.h"
 
 class BSPGenerator {
@@ -14,11 +14,14 @@ private:
     const int minRoomSize, maxRoomSize;
     void binaryPart(std::vector<Part> &pVec, int i);
 
+    int lastRoomX, lastRoomY;
+
 public:
     BSPGenerator(int minRoom, int maxRoom);
-    void generate(Map &map); // Fix spelling
+    void generate(Map &map);
     void digRooms(Map &map, std::vector<Part> &vPec);
     void digOneRoom();
+    void digCorridor();
 };
 
 

@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include "libtcod.hpp"
 #include "../include/Map.h"
-#include "Part.h"
-#include "BSPGenerator.h"
+#include "../include/Part.h"
+#include "../include/BSPGenerator.h"
 
 int main() {
     srand(time(NULL));

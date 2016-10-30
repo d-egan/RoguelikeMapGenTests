@@ -1,12 +1,12 @@
 //
 // Created by dec on 20/10/16.
 //
-#include "include/Tile.h"
+#include "../include/Tile.h"
 #include <vector>
 #include <stdlib.h>
 #include <iostream>
 #include "libtcod.hpp"
-#include "include/Map.h"
+#include "../include/Map.h"
 
 
 
@@ -71,5 +71,8 @@ void Map::markPart(int x1, int y1, int w, int h) {
             }
         }
     }
+}
+
+void Map::digCorridor(int x1, int y1, int x2, int y2) {
 
 }
