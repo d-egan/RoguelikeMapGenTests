@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "../include/Part.h"
-// Switch order to xpos, ypox, width, height
+
 Part::Part(int x, int y, int w, int h) : topLeftX(x), topLeftY(y), width(w), height(h) { }
 
 int Part::getWidth() { return width;}

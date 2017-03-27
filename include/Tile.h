@@ -6,18 +6,27 @@
 #define MAPGEN_TILE_H
 
 
-class Tile {
+#include <SFML/Graphics/Sprite.hpp>
+#include <memory>
+#include "SpriteType.h"
+
+class Tile
+{
 private:
     bool walkable;
     bool debug;
+
+
 public:
 
-    Tile();
+    Tile(SpriteType sprite);
     bool getWalkable();
-    void setWall();
-    void setWalk();
-    void setDebug();
+    void setWall(SpriteType sprite);
+    void setWalk(SpriteType sprite);
+    void setDebug(SpriteType sprite);
     bool isDebug();
+
+    SpriteType m_sprite;
 };
 
 

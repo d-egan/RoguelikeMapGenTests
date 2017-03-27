@@ -4,16 +4,28 @@
 
 #include "../include/Tile.h"
 
-Tile::Tile() {
-    walkable = false;
-    debug = false;
+Tile::Tile(SpriteType sprite) : m_sprite(sprite), walkable{false}, debug{false}
+{
+
 }
 
 bool Tile::getWalkable() { return walkable; }
 bool Tile::isDebug() { return debug; }
 
-void Tile::setWall() { walkable = false; }
+void Tile::setWall(SpriteType sprite)
+{
+    walkable = false;
+    m_sprite = sprite;
+}
 
-void Tile::setWalk() { walkable = true; }
-void Tile::setDebug() { debug = true; }
+void Tile::setWalk(SpriteType sprite)
+{
+    walkable = true;
+    m_sprite = sprite;
+}
+void Tile::setDebug(SpriteType sprite)
+{
+    debug = true;
+    m_sprite = sprite;
+}
 
