@@ -17,8 +17,7 @@ class Map
     std::vector <Tile> tiles;
     int width, height;
     sf::Texture texture;
-    sf::Sprite sprite;
-    //std::array<sf::Sprite>
+
     std::vector<sf::Sprite> tileSheet;
 
 public:
@@ -36,6 +35,8 @@ public:
     void dig(int x1, int y1, int w, int h);
     void markPart(int x1, int y1, int w, int h);
     void digCorridor(int x1, int y1, int x2, int y2);
+
+    void mapClear();
 };
 
 

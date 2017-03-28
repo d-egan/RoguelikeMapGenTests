@@ -11,6 +11,7 @@ int main()
 
     sf::RenderWindow rw{sf::VideoMode(800, 640, 32), "Map Gen Tests"};
     //rw.setSize(sf::Vector2<unsigned int>(512,1000));
+    rw.setFramerateLimit(60);
 
     Map bspMap(100, 80);
 
@@ -18,10 +19,14 @@ int main()
     BSPGenerator bsp(6, 20);
     bsp.generate(bspMap);
 
-    sf::Event e;
+
 
     while ( rw.isOpen() )
     {
+        //std::cin.get();
+        sf::Event e;
+        //rw.pollEvent(e);
+
         while(rw.pollEvent(e))
         {
             if (e.type == sf::Event::EventType::Closed)
@@ -31,22 +36,19 @@ int main()
             {
                 if (e.key.code == sf::Keyboard::R)
                 {
+                    bspMap.mapClear();
                     bsp.generate(bspMap);
-                    std::cout << "the escape key was pressed" << std::endl;
-                    std::cout << "control:" << e.key.control << std::endl;
-                    std::cout << "alt:" << e.key.alt << std::endl;
-                    std::cout << "shift:" << e.key.shift << std::endl;
-                    std::cout << "system:" << e.key.system << std::endl;
                 }
             }
-
-            rw.clear();
-            bspMap.render(rw);
-            rw.display();
-
-
-
         }
+
+
+        std::cout << "STATR" << std::endl;
+        rw.clear();
+        bspMap.render(rw);
+        rw.display();
+
+
     }
 
 

@@ -7,11 +7,13 @@
 #include "../include/BSPGenerator.h"
 #include "../include/Part.h"
 
-BSPGenerator::BSPGenerator(int minRoom, int maxRoom) : minRoomSize(minRoom), maxRoomSize(maxRoom) {
+BSPGenerator::BSPGenerator(int minRoom, int maxRoom) : minRoomSize(minRoom), maxRoomSize(maxRoom)
+{
 
 }
 
-void BSPGenerator::generate(Map &map) {
+void BSPGenerator::generate(Map &map)
+{
 
     //TODO Replace with actual tree data structure
     std::vector <Part> parts;
@@ -22,7 +24,8 @@ void BSPGenerator::generate(Map &map) {
 
     //TODO Use recursive function
     for (int i = 0; i < 4; i++) {
-        for (int z = parts.size() - 1; z >= 0; z--) {
+        for (int z = parts.size() - 1; z >= 0; z--)
+        {
             binaryPart(parts, z);
             std::cout << "Size of parts: " << parts.size() << std::endl;
         }
@@ -32,7 +35,8 @@ void BSPGenerator::generate(Map &map) {
 
 }
 
-void BSPGenerator::binaryPart(std::vector <Part> &pVec, int i) {
+void BSPGenerator::binaryPart(std::vector <Part> &pVec, int i)
+{
 
     //TODO Replace rand()
 
@@ -40,7 +44,8 @@ void BSPGenerator::binaryPart(std::vector <Part> &pVec, int i) {
 
     int splitDir = randomInt %2;
 
-    if (splitDir) {
+    if (splitDir)
+    {
 
         int variance = (rand() % int((pVec.at(i).getWidth() * .4)));
         variance -= pVec.at(i).getWidth() * .2;
@@ -96,15 +101,17 @@ void BSPGenerator::binaryPart(std::vector <Part> &pVec, int i) {
     }
 }
 
-void BSPGenerator::digRooms(Map &map, std::vector<Part> &vPec) {
+void BSPGenerator::digRooms(Map &map, std::vector<Part> &vPec)
+{
     // Fix vector of parts naming
 
     // Is there a more efficient way to make these calls
-    for(int i = 0; i < vPec.size(); i++) {
+    for(int i = 0; i < vPec.size(); i++)
+    {
 
         map.markPart(vPec.at(i).getTopLeftX(), vPec.at(i).getTopLeftY(), vPec.at(i).getWidth(), vPec.at(i).getHeight());
 
-        int x1 , x2, y1, y2 = 1;
+        int x1{1}, x2{1}, y1{1}, y2{1};
         int xDif, yDif;
 
         xDif = int((vPec.at(i).getWidth() - minRoomSize) *.5);
@@ -115,11 +122,13 @@ void BSPGenerator::digRooms(Map &map, std::vector<Part> &vPec) {
         std::cout << "xDif: " << xDif << std::endl;
         std::cout << "yDif: " << yDif << std::endl;
         std::cout << "Min Room: " << minRoomSize << std::endl;
-        if (xDif != 0) {
+        if (xDif != 0)
+        {
             x1 = rand() % xDif;
             x2 = rand() % xDif;
         }
-        if (yDif != 0) {
+        if (yDif != 0)
+        {
             y1 = rand() % yDif;
             y2 = rand() % yDif;
         }
@@ -127,7 +136,8 @@ void BSPGenerator::digRooms(Map &map, std::vector<Part> &vPec) {
         //TODO Fix random adding and subtracting
         map.dig(vPec.at(i).getTopLeftX() + x1+1, vPec.at(i).getTopLeftY() + y1+1, vPec.at(i).getWidth() - (x1 +x2)-2, vPec.at(i).getHeight() - (y1 + y2)-2);
 
-        if (i != 0) {
+        if (i != 0)
+        {
             map.digCorridor(lastRoomX, lastRoomY, vPec.at(i).getTopLeftX() + vPec.at(i).getWidth() * .5, vPec.at(i).getTopLeftY() + vPec.at(i).getHeight() * .5 );
         }
 

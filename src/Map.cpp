@@ -97,3 +97,8 @@ void Map::digCorridor(int x1, int y1, int x2, int y2)
 {
 
 }
+
+void Map::mapClear()
+{
+    tiles.assign(width*height, Tile(SpriteType::WALL));
+}
