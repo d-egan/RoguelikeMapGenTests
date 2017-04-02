@@ -11,6 +11,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include "Tile.h"
 #include <array>
+#include <SFML/Graphics/RenderTexture.hpp>
 
 class Map
 {
@@ -19,6 +20,8 @@ class Map
     sf::Texture texture;
 
     std::vector<sf::Sprite> tileSheet;
+    sf::RenderTexture mapTexture;
+    sf::Sprite mapSprite;
 
 public:
     Map(int width, int height);
@@ -36,6 +39,7 @@ public:
     void markPart(int x1, int y1, int w, int h);
     void digCorridor(int x1, int y1, int x2, int y2);
 
+    void createMapDrawable();
     void mapClear();
 };
 

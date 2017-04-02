@@ -23,10 +23,7 @@ int main()
 
     while ( rw.isOpen() )
     {
-        //std::cin.get();
         sf::Event e;
-        //rw.pollEvent(e);
-
         while(rw.pollEvent(e))
         {
             if (e.type == sf::Event::EventType::Closed)
@@ -42,12 +39,9 @@ int main()
             }
         }
 
-
-        std::cout << "STATR" << std::endl;
         rw.clear();
         bspMap.render(rw);
         rw.display();
-
 
     }
 

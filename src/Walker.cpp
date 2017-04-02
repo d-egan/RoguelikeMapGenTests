@@ -5,11 +5,13 @@
 #include <stdlib.h>
 #include "../include/Walker.h"
 
-Walker::Walker() {
-    posX, posY, minX, maxX, minY, maxY = 0;
+Walker::Walker() : posX{0}, posY{0}, minX{0}, maxX{0}, minY{0}, maxY{0}
+{
+
 }
 
-void Walker::step() {
+void Walker::step()
+{
     int xOrY = rand() % 2;
 
     //if ()

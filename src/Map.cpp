@@ -27,6 +27,7 @@ Map::Map(int width, int height) : width(width), height(height)
 
 void Map::render(sf::RenderWindow & rw)
 {
+    /*
     for (int y=0; y < height; y++)
     {
         for (int x=0; x < width; x++)
@@ -37,7 +38,9 @@ void Map::render(sf::RenderWindow & rw)
 
             rw.draw(tileSheet[ind]);
         }
-    }
+    }*/
+
+    rw.draw(mapSprite);
 }
 
 bool Map::isWall(int x, int y)
@@ -101,4 +104,25 @@ void Map::digCorridor(int x1, int y1, int x2, int y2)
 void Map::mapClear()
 {
     tiles.assign(width*height, Tile(SpriteType::WALL));
+}
+
+void Map::createMapDrawable()
+{
+    mapTexture.create(800, 640);
+    mapTexture.clear(sf::Color::Red);
+
+    for (int y=0; y < height; y++)
+    {
+        for (int x=0; x < width; x++)
+        {
+            //tiles[x+(y*width)].m_sprite->setPosition(x*8,y*8);
+            int ind = static_cast<int>(tiles[x+(y*width)].m_sprite);
+            tileSheet[ind].setPosition(x*8,y*8);
+
+            mapTexture.draw(tileSheet[ind]);
+        }
+    }
+    mapTexture.display();
+
+    mapSprite.setTexture(mapTexture.getTexture());
 }

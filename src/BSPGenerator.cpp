@@ -7,6 +7,14 @@
 #include "../include/BSPGenerator.h"
 #include "../include/Part.h"
 
+/*
+ *  Binary Space Partition Map Generator
+ *
+ *
+ *
+ * */
+
+
 BSPGenerator::BSPGenerator(int minRoom, int maxRoom) : minRoomSize(minRoom), maxRoomSize(maxRoom)
 {
 
@@ -19,11 +27,9 @@ void BSPGenerator::generate(Map &map)
     std::vector <Part> parts;
     parts.push_back(Part(0, 0, map.getWidth(), map.getHeight()));
 
-    std::cout << "Maps address in generator: " << &map << std::endl;
-
-
-    //TODO Use recursive function
-    for (int i = 0; i < 4; i++) {
+    //TODO Use recursive function?
+    for (int i = 0; i < 4; i++)
+    {
         for (int z = parts.size() - 1; z >= 0; z--)
         {
             binaryPart(parts, z);
@@ -33,6 +39,7 @@ void BSPGenerator::generate(Map &map)
     // Passing reference again? Possibly not good?
     digRooms(map, parts);
 
+    map.createMapDrawable();
 }
 
 void BSPGenerator::binaryPart(std::vector <Part> &pVec, int i)
@@ -117,11 +124,14 @@ void BSPGenerator::digRooms(Map &map, std::vector<Part> &vPec)
         xDif = int((vPec.at(i).getWidth() - minRoomSize) *.5);
         yDif = int((vPec.at(i).getHeight() - minRoomSize) *.5); // Are odd numbers a problem yet
 
+        /*
         std::cout << "Width: " << vPec.at(i).getWidth() << std::endl;
         std::cout << "Height: " << vPec.at(i).getHeight() << std::endl;
         std::cout << "xDif: " << xDif << std::endl;
         std::cout << "yDif: " << yDif << std::endl;
         std::cout << "Min Room: " << minRoomSize << std::endl;
+        */
+
         if (xDif != 0)
         {
             x1 = rand() % xDif;
