@@ -27,18 +27,6 @@ Map::Map(int width, int height) : width(width), height(height)
 
 void Map::render(sf::RenderWindow & rw)
 {
-    /*
-    for (int y=0; y < height; y++)
-    {
-        for (int x=0; x < width; x++)
-        {
-            //tiles[x+(y*width)].m_sprite->setPosition(x*8,y*8);
-            int ind = static_cast<int>(tiles[x+(y*width)].m_sprite);
-            tileSheet[ind].setPosition(x*8,y*8);
-
-            rw.draw(tileSheet[ind]);
-        }
-    }*/
 
     rw.draw(mapSprite);
 }
@@ -74,8 +62,10 @@ void Map::dig(int x1, int y1, int w, int h)
     // remove calculations
     int widthEnd = x1 + w;
     int heightEnd = y1 + h;
-    for (int x=x1; x < widthEnd; x++) {
-        for (int y=y1; y < heightEnd; y++) {
+    for (int x=x1; x < widthEnd; x++)
+    {
+        for (int y=y1; y < heightEnd; y++)
+        {
             //std::cout << "Digging from: " << x+(y*width) << std::endl;
             tiles[x+(y*width)].setWalk(SpriteType::FLOOR);
         }
@@ -87,9 +77,12 @@ void Map::markPart(int x1, int y1, int w, int h)
     int widthEnd = x1 + w;
     int heightEnd = y1 + h;
 
-    for (int x=x1; x < widthEnd; x++) {
-        for (int y=y1; y < heightEnd; y++) {
-            if ((y == y1 || y == heightEnd-1) || ((x==x1) || (x==widthEnd-1))) {
+    for (int x=x1; x < widthEnd; x++)
+    {
+        for (int y=y1; y < heightEnd; y++)
+        {
+            if ((y == y1 || y == heightEnd-1) || ((x==x1) || (x==widthEnd-1)))
+            {
                 tiles[x + (y * width)].setDebug(SpriteType::DEBUG);
             }
         }
@@ -124,5 +117,5 @@ void Map::createMapDrawable()
     }
     mapTexture.display();
 
-    mapSprite.setTexture(mapTexture.getTexture());
+    mapSprite.setTexture(mapTexture.getTexture()); // might need to add "true if resizing rect
 }

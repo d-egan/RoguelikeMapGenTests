@@ -72,9 +72,6 @@ void BSPGenerator::binaryPart(std::vector <Part> &pVec, int i)
         Part a(pVec.at(i).getTopLeftX(), pVec.at(i).getTopLeftY(), splitPos - pVec.at(i).getTopLeftX(), pVec.at(i).getHeight());
         Part b(splitPos, pVec.at(i).getTopLeftY(), pVec.at(i).getWidth() - (splitPos - pVec.at(i).getTopLeftX()), pVec.at(i).getHeight());
 
-        //Part a(pVec.at(i).getX1(), pVec.at(i).getY1,
-        //
-
 
         // Fix ordering
         pVec.erase(pVec.begin() + i);
@@ -82,7 +79,8 @@ void BSPGenerator::binaryPart(std::vector <Part> &pVec, int i)
         pVec.push_back(b);
 
 
-    } else {
+    } else
+    {
         std::cout << "Vertical Partition" << std::endl;
 
         std::cout << "Height     : :" << pVec.at(i).getHeight() << std::endl;

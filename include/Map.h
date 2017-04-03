@@ -21,7 +21,7 @@ class Map
 
     std::vector<sf::Sprite> tileSheet;
     sf::RenderTexture mapTexture;
-    sf::Sprite mapSprite;
+    sf::Sprite mapSprite; // sf::sprites actually hold a reference to the texture
 
 public:
     Map(int width, int height);
