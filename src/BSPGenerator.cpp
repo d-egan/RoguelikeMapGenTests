@@ -33,7 +33,6 @@ void BSPGenerator::generate(Map &map)
         for (int z = parts.size() - 1; z >= 0; z--)
         {
             binaryPart(parts, z);
-            std::cout << "Size of parts: " << parts.size() << std::endl;
         }
     }
     // Passing reference again? Possibly not good?
@@ -57,13 +56,9 @@ void BSPGenerator::binaryPart(std::vector <Part> &pVec, int i)
         int variance = (rand() % int((pVec.at(i).getWidth() * .4)));
         variance -= pVec.at(i).getWidth() * .2;
 
-        std::cout << "Variance HP: " << variance << std::endl;
-
         int splitPos = int(pVec.at(i).getWidth()*.5);
-        std::cout << "Split pos X : " << splitPos << std::endl;
 
         splitPos += pVec.at(i).getTopLeftX() + variance;
-        std::cout << "Split pos X : " << splitPos << std::endl;
 
         if ((splitPos - pVec.at(i).getTopLeftX()) < minRoomSize + 2 || (pVec.at(i).getWidth() + pVec.at(i).getTopLeftX()) - splitPos < minRoomSize ) return;
 
@@ -81,19 +76,12 @@ void BSPGenerator::binaryPart(std::vector <Part> &pVec, int i)
 
     } else
     {
-        std::cout << "Vertical Partition" << std::endl;
-
-        std::cout << "Height     : :" << pVec.at(i).getHeight() << std::endl;
         int variance = (rand() % int((pVec.at(i).getHeight() * .4)));
         variance -= pVec.at(i).getHeight() * .2;
-        std::cout << "Varience VP: " << variance << std::endl;
-
 
         int splitPos = int(pVec.at(i).getHeight()*.5);
-        std::cout << "Split pos Y : " << splitPos << std::endl;
 
         splitPos += pVec.at(i).getTopLeftY() + variance;
-        std::cout << "Split pos Y : " << splitPos << std::endl;
 
         if ((splitPos - pVec.at(i).getTopLeftY()) < minRoomSize + 2 || (pVec.at(i).getHeight() + pVec.at(i).getTopLeftY()) - splitPos < minRoomSize) return; // Fix this mess
 
@@ -121,14 +109,6 @@ void BSPGenerator::digRooms(Map &map, std::vector<Part> &vPec)
 
         xDif = int((vPec.at(i).getWidth() - minRoomSize) *.5);
         yDif = int((vPec.at(i).getHeight() - minRoomSize) *.5); // Are odd numbers a problem yet
-
-        /*
-        std::cout << "Width: " << vPec.at(i).getWidth() << std::endl;
-        std::cout << "Height: " << vPec.at(i).getHeight() << std::endl;
-        std::cout << "xDif: " << xDif << std::endl;
-        std::cout << "yDif: " << yDif << std::endl;
-        std::cout << "Min Room: " << minRoomSize << std::endl;
-        */
 
         if (xDif != 0)
         {
